@@ -45,7 +45,7 @@ class UserDetailsWrapper: NSObject {
     }
 }
 
-extension UserDetails {
+extension UserDetails: Identifiable {
     func modeltoArray() -> [Any?] {
          let mirror = Mirror(reflecting: self)
          var tempArray = [String]()

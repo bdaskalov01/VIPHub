@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol DetailsPresenterProtocol {
+    
+    func updateDetails(details: UserDetails)
+    
+}

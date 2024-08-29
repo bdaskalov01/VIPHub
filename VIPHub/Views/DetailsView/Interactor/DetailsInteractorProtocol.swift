@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol DetailsInteractorProtocol {
+    
+    func displayUserDetails(id: String)
+}

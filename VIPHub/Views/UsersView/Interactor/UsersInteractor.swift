@@ -9,16 +9,20 @@ import Foundation
 
 final class UsersInteractor: UsersInteractorProtocol {
     
-    var worker: APIWorker?
+    var apiWorker: APIWorker?
     var presenter: UsersPresenterProtocol?
+    var router: UsersRouter?
     
     
     func displayData(input: String) {
-        presenter!.mapDisplayData(users: "input + \(input)")
+        Task {
+            let result = try await self.apiWorker?.fetchData(input: input)
+            presenter?.mapUsers(users: result!)
+        }
     }
     
-    func updateState() {
-        
+    func navigateToDetails(id: String) {
+        router?.navigateToDetails(id: id)
     }
     
 }

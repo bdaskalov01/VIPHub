@@ -10,9 +10,11 @@ import Foundation
 final class UsersPresenter: UsersPresenterProtocol {
     
     var view: UsersViewProtocol?
+    var state: GlobalState?
     
-    func mapDisplayData(users: String) {
-        view!.displayData(users: users)
+    @MainActor func mapUsers(users: [User]) {
+        state?.setUsers(input: users)
     }
+    
     
 }
