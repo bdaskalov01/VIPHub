@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD2576332C7F245400709493 /* DetailsAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2576322C7F245400709493 /* DetailsAPIWorker.swift */; };
+		FD2576352C7F249300709493 /* DetailsAPIWorkerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2576342C7F249300709493 /* DetailsAPIWorkerImpl.swift */; };
+		FD2576382C7F3DB400709493 /* UsersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2576372C7F3DB400709493 /* UsersRouter.swift */; };
+		FD25763A2C7F3E4E00709493 /* UsersRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2576392C7F3E4E00709493 /* UsersRouterImpl.swift */; };
 		FD4174042C74CC8B005771EA /* VIPHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4174032C74CC8B005771EA /* VIPHubApp.swift */; };
 		FD4174062C74CC8B005771EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4174052C74CC8B005771EA /* ContentView.swift */; };
 		FD4174082C74CC93005771EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4174072C74CC93005771EA /* Assets.xcassets */; };
@@ -37,6 +41,7 @@
 		FD876C7F2C75CF4A00E4E35E /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD876C7E2C75CF4A00E4E35E /* DetailsView.swift */; };
 		FD876C822C75CF6800E4E35E /* APIWorkerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD876C812C75CF6800E4E35E /* APIWorkerImpl.swift */; };
 		FD876C842C75CF8D00E4E35E /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD876C832C75CF8D00E4E35E /* APIWorker.swift */; };
+		FD8AB8832C7DAC3800686155 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8AB8822C7DAC3800686155 /* GlobalState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD2576322C7F245400709493 /* DetailsAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAPIWorker.swift; sourceTree = "<group>"; };
+		FD2576342C7F249300709493 /* DetailsAPIWorkerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAPIWorkerImpl.swift; sourceTree = "<group>"; };
+		FD2576372C7F3DB400709493 /* UsersRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRouter.swift; sourceTree = "<group>"; };
+		FD2576392C7F3E4E00709493 /* UsersRouterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRouterImpl.swift; sourceTree = "<group>"; };
 		FD4174002C74CC8B005771EA /* VIPHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4174032C74CC8B005771EA /* VIPHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPHubApp.swift; sourceTree = "<group>"; };
 		FD4174052C74CC8B005771EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +99,7 @@
 		FD876C7E2C75CF4A00E4E35E /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		FD876C812C75CF6800E4E35E /* APIWorkerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorkerImpl.swift; sourceTree = "<group>"; };
 		FD876C832C75CF8D00E4E35E /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
+		FD8AB8822C7DAC3800686155 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +127,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD2576312C7F243800709493 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				FD2576322C7F245400709493 /* DetailsAPIWorker.swift */,
+				FD2576342C7F249300709493 /* DetailsAPIWorkerImpl.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		FD2576362C7F3D9800709493 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				FD2576372C7F3DB400709493 /* UsersRouter.swift */,
+				FD2576392C7F3E4E00709493 /* UsersRouterImpl.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		FD4173F72C74CC8B005771EA = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +175,7 @@
 				FD4174092C74CC93005771EA /* Preview Content */,
 				FD876C632C75CD5900E4E35E /* Services */,
 				FD876C6D2C75CE2C00E4E35E /* Views */,
+				FD8AB8822C7DAC3800686155 /* GlobalState.swift */,
 			);
 			path = VIPHub;
 			sourceTree = "<group>";
@@ -179,6 +208,7 @@
 		FD41742D2C74CEBF005771EA /* UsersView */ = {
 			isa = PBXGroup;
 			children = (
+				FD2576362C7F3D9800709493 /* Router */,
 				FD876C802C75CF5A00E4E35E /* Workers */,
 				FD41742F2C74CEDD005771EA /* Interactor */,
 				FD876C592C75CC4100E4E35E /* Models */,
@@ -247,6 +277,7 @@
 		FD876C6C2C75CE1D00E4E35E /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				FD2576312C7F243800709493 /* Workers */,
 				FD876C702C75CE4B00E4E35E /* Interactor */,
 				FD876C6E2C75CE3900E4E35E /* Models */,
 				FD876C6F2C75CE4100E4E35E /* Presenter */,
@@ -447,10 +478,14 @@
 				FD876C752C75CEF200E4E35E /* DetailsInteractorProtocol.swift in Sources */,
 				FD876C772C75CF0100E4E35E /* DetailsInteractor.swift in Sources */,
 				FD4174362C74CFFD005771EA /* UsersInteractor.swift in Sources */,
+				FD2576352C7F249300709493 /* DetailsAPIWorkerImpl.swift in Sources */,
+				FD8AB8832C7DAC3800686155 /* GlobalState.swift in Sources */,
 				FD876C602C75CD1900E4E35E /* UsersCache.swift in Sources */,
 				FD876C792C75CF0F00E4E35E /* DetailsPresenterProtocol.swift in Sources */,
+				FD2576332C7F245400709493 /* DetailsAPIWorker.swift in Sources */,
 				FD4174342C74CF38005771EA /* UsersViewProtocol.swift in Sources */,
 				FD876C672C75CD9200E4E35E /* DetailsAPI.swift in Sources */,
+				FD2576382C7F3DB400709493 /* UsersRouter.swift in Sources */,
 				FD876C5B2C75CC5800E4E35E /* GHUserResponse.swift in Sources */,
 				FD4174382C74D143005771EA /* UsersInteractorProtocol.swift in Sources */,
 				FD4174322C74CF25005771EA /* UsersView.swift in Sources */,
@@ -461,6 +496,7 @@
 				FD876C7B2C75CF2400E4E35E /* DetailsPresenter.swift in Sources */,
 				FD876C622C75CD2700E4E35E /* UserDetailsCache.swift in Sources */,
 				FD876C732C75CE9500E4E35E /* UserDetails.swift in Sources */,
+				FD25763A2C7F3E4E00709493 /* UsersRouterImpl.swift in Sources */,
 				FD876C822C75CF6800E4E35E /* APIWorkerImpl.swift in Sources */,
 				FD4174042C74CC8B005771EA /* VIPHubApp.swift in Sources */,
 			);

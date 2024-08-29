@@ -9,6 +9,7 @@ import Foundation
 
 protocol UsersPresenterProtocol {
     
-    func mapDisplayData(users: String)
+    func mapUsers(users: [User])
+    
     
 }

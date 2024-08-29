@@ -25,7 +25,7 @@ final class DetailsAPIimpl: DetailsAPI {
         let url = URL(string: "\(API_URL + id)")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Bearer \(API_TOKEN)", forHTTPHeaderField: "Authorization")
+ //       request.setValue("Bearer \(API_TOKEN)", forHTTPHeaderField: "Authorization")
         let (data, _) = try await URLSession.shared.data(for: request)
         userDetails = try JSONDecoder().decode(UserDetails.self, from: data)
         cache.setArray(userDetails, forKey: id)

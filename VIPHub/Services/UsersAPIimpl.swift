@@ -9,10 +9,11 @@ import Foundation
 
 final class UsersAPIimpl : UsersAPI  {
     
-    static var isFetching: Bool = false
+//    static var isFetching: Bool = false
     let API_URL = "https://api.github.com/search/users?q="
     let API_TOKEN = "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"
     let cache = UsersCache()
+    var state: GlobalState?
     var query: String
     var totalCount: Int
     var page: Int
@@ -33,8 +34,7 @@ final class UsersAPIimpl : UsersAPI  {
         
         var users: [User] = []
         
-        UsersAPIimpl.isFetching = true
-
+        await state?.setIsFetchingFun(input: true)
         
         if (query != input) {
             query = input
@@ -60,11 +60,11 @@ final class UsersAPIimpl : UsersAPI  {
         
         
         if (input == "") {
-            UsersAPIimpl.isFetching = false
+            await state?.setIsFetchingFun(input: false)
             return []
         }
         if (users.count == totalCount && totalCount>0) {
-            UsersAPIimpl.isFetching = false
+            await state?.setIsFetchingFun(input: false)
             hasNextPage = false
             return users
         }
@@ -75,7 +75,7 @@ final class UsersAPIimpl : UsersAPI  {
             let url = URL(string: "\(API_URL + query)&page=\(page)")!
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("Bearer \(API_TOKEN)", forHTTPHeaderField: "Authorization")
+           // request.setValue("Bearer \(API_TOKEN)", forHTTPHeaderField: "Authorization")
             let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(GHUserResponse.self, from: data)
             totalCount = decoded.total_count
@@ -85,14 +85,14 @@ final class UsersAPIimpl : UsersAPI  {
             cache.setArray(users, forKey: input)
             page+=1
             cache.setLastPage(lastPage: page as NSNumber, forKey: input)
-            UsersAPIimpl.isFetching = false
+            await state?.setIsFetchingFun(input: false)
             hasNextPage = true
             return users
         }
     
         else {
             shouldFetchAfterCaching = true
-            UsersAPIimpl.isFetching = false
+            await state?.setIsFetchingFun(input: false)
             return users
         }
     }

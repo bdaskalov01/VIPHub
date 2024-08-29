@@ -9,5 +9,4 @@ import Foundation
 
 protocol UsersViewProtocol {
     
-    func displayData(users: String)
 }

@@ -11,6 +11,6 @@ protocol UsersInteractorProtocol {
     
     func displayData(input: String)
     
-    func updateState()
+    func changeDetailsId(id: String)
     
 }
