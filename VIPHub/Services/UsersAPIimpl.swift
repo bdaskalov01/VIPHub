@@ -29,7 +29,7 @@ final class UsersAPIimpl : UsersAPI  {
         self.shouldFetchAfterCaching = true
     }
     
-    func fetchUsers(input: String) async throws -> [User]{
+    func fetchUsers(input: String) async throws -> ([User], String){
         
         var users: [User] = []
         
@@ -54,19 +54,20 @@ final class UsersAPIimpl : UsersAPI  {
         if let cachee = cache.getArray(forKey: input){
                 print("Getting cached data")
                 users = cachee
+            totalCount = cache.getTotalCount(forKey: input)!
         }
         
         
         if (input == "") {
-            return []
+            return ([], "Empty input.")
         }
         if (users.count == totalCount && totalCount>0) {
             hasNextPage = false
-            return users
+            return (users, "End has been reached.")
         }
     
         if (shouldFetchAfterCaching) {
-            print("Making an API call for users!")
+            print("Making a API call for users!")
             
             let url = URL(string: "\(API_URL + query)&page=\(page)")!
             var request = URLRequest(url: url)
@@ -75,19 +76,23 @@ final class UsersAPIimpl : UsersAPI  {
             let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(GHUserResponse.self, from: data)
             totalCount = decoded.total_count
+            if (decoded.total_count == 0) {
+                return (users, "No users found.")
+            }
             for decode in decoded.items {
                 users.append(decode)
             }
             cache.setArray(users, forKey: input)
+            cache.setTotalCount(totalCount: totalCount as NSNumber, forKey: input)
             page+=1
             cache.setLastPage(lastPage: page as NSNumber, forKey: input)
             hasNextPage = true
-            return users
+            return (users, "")
         }
     
         else {
             shouldFetchAfterCaching = true
-            return users
+            return (users, "")
         }
     }
     

@@ -9,4 +9,6 @@ import Foundation
 
 protocol UsersViewProtocol {
     
+    func constructDetailsView() -> DetailsView
+    
 }

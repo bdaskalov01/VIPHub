@@ -9,7 +9,7 @@ import Foundation
 
 protocol UsersInteractorProtocol {
     
-    func displayData(input: String)
+    func displayData(input: String) async throws
     
     func changeDetailsId(id: String)
     

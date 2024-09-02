@@ -12,8 +12,9 @@ final class DetailsPresenter: DetailsPresenterProtocol {
     var view: DetailsViewProtocol?
     var globalState: GlobalState = GlobalState().getInstance()
     
+    @MainActor
     func updateDetails(details: UserDetails) {
-        Task {
+
             self.globalState.setDetails(input: details)
             let detailsWithLabel = {
                 details.modeltoArray().compactMap { item in
@@ -30,7 +31,6 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             }()
 
             self.globalState.setDetailsWithLabel(input: detailsWithLabel)
-        }
     }
     
 }

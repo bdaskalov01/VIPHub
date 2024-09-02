@@ -15,4 +15,6 @@ protocol UsersPresenterProtocol {
     
     func changeFetching(input: Bool)
     
+    func changeError(input: String)
+    
 }

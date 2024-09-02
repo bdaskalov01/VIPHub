@@ -12,10 +12,8 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     var presenter: DetailsPresenterProtocol?
     var apiWorker: DetailsAPIWorker?
     
-    func displayUserDetails(id: String) {
-        Task {
+    func displayUserDetails(id: String) async throws {
             let details = try await apiWorker!.fetchDetails(id: id)
             presenter!.updateDetails(details: details)
-        }
     }
 }

@@ -9,5 +9,5 @@ import Foundation
 
 protocol DetailsInteractorProtocol {
     
-    func displayUserDetails(id: String)
+    func displayUserDetails(id: String) async throws
 }

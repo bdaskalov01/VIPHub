@@ -9,5 +9,5 @@ import Foundation
 
 protocol APIWorker {
     
-    func fetchData(input: String) async throws -> [User]
+    func fetchData(input: String) async throws -> ([User], String)
 }

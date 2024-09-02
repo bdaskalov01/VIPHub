@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UsersView: View {
+struct UsersView: View, UsersViewProtocol {
     
     let interactor: UsersInteractorProtocol?
     @ObservedObject var state: GlobalState = GlobalState().getInstance()
@@ -23,11 +23,15 @@ struct UsersView: View {
                 .navigationTitle("Items")
                 .onChange(of: searchText) { newValue in
                     query = newValue
-                    interactor!.displayData(input: query)
+                    Task { @MainActor in
+                      try await interactor!.displayData(input: query)
+                    }
                 }
                 .onChange(of: isAtBottom) { value in
                     if value {
-                        interactor!.displayData(input: query)
+                        Task { @MainActor in
+                          try await interactor!.displayData(input: query)
+                        }
                         isAtBottom = false
                     }
                 }
@@ -50,7 +54,7 @@ struct UsersView: View {
             
             
         }
-        .alert(state.error, isPresented: $isThereAnError) {
+        .alert(state.error ?? "" , isPresented: $state.isThereError) {
             Button(role: .none) {
                 // presenter?.setIsThereError(input: false)
             } label: {
@@ -66,7 +70,7 @@ struct UsersView: View {
     @ViewBuilder func listOfUsers() -> some View {
         VStack {
             NavigationLink(destination: constructDetailsView()){
-                List(state.users) { item in
+                List(state.users ?? []) { item in
                     HStack {
                         
                         if let imageUrl = URL(string: item.avatar_url) {
@@ -94,7 +98,7 @@ struct UsersView: View {
                         }
                         Text(item.login)
                             .onAppear {
-                                if item == state.users.last {
+                                if item == state.users!.last {
                                     isAtBottom = true
                                     print("Scrolled to bottom")
                                 }
@@ -111,16 +115,16 @@ struct UsersView: View {
             }
             .searchable(text: $query, prompt: "Search items")
             .onSubmit(of: .search) {
-                self.searchText = query
-                print(query)
+                Task { @MainActor in
+                    try await interactor!.displayData(input: query)
+                }
             }
             .disabled(state.isFetching)
         }
         
         
     }
-    
-    func constructDetailsView() -> some View {
+    func constructDetailsView() -> DetailsView {
         let presenter = DetailsPresenter()
         let interactor = DetailsInteractor()
         let detailsApiWorker = DetailsAPIWorkerImpl()
@@ -134,11 +138,9 @@ struct UsersView: View {
         presenter.view = view
         return view
     }
-}
-
-extension UsersView: UsersViewProtocol {
     
 }
+
 
 //#Preview {
 ///    UsersView()

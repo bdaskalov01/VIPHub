@@ -11,9 +11,9 @@ final class APIWorkerImpl: APIWorker, ObservableObject {
     
     var api: UsersAPI?
     
-    func fetchData(input: String) async throws -> [User] {
-        guard let users = try await api?.fetchUsers(input: input) else {return []}
-        return users
+    func fetchData(input: String) async throws -> ([User], String) {
+        let (users, error) = try await (api?.fetchUsers(input: input) as? ([User], String))!
+        return (users, error)
     }
     
 }

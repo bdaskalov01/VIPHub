@@ -19,7 +19,7 @@ struct ContentView: View {
         
     }
     
-    func UsersView() -> some View {
+    func UsersView() -> UsersView {
         let presenter = UsersPresenter()
         let interactor = UsersInteractor()
         let usersApiWorker = APIWorkerImpl()

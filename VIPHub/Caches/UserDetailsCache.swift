@@ -7,10 +7,13 @@
 
 import Foundation
 
-class UserDetailsCache {
+class UserDetailsCache: UserDetailsCacheProtocol {
 
-    static let cache = NSCache<NSString, UserDetailsWrapper>()
+    private static let cache = NSCache<NSString, UserDetailsWrapper>()
 
+    func resetCache() {
+        UserDetailsCache.cache.removeAllObjects()
+    }
     
     func setArray(_ userDetails: UserDetails, forKey key: String) {
         let wrapper = UserDetailsWrapper(userDetails: userDetails)

@@ -14,13 +14,14 @@ final class UsersInteractor: UsersInteractorProtocol {
     var router: UsersRouter?
     
     
-    func displayData(input: String) {
-        Task {
+    func displayData(input: String) async throws{
             presenter!.changeFetching(input: true)
-            let result = try await self.apiWorker?.fetchData(input: input)
+            var result: [User]
+            var error: String
+            (result, error) = try await (self.apiWorker?.fetchData(input: input) as? ([User], String))!
             presenter!.changeFetching(input: false)
-            presenter!.mapUsers(users: result!)
-        }
+            presenter!.mapUsers(users: result)
+            presenter!.changeError(input: error)
     }
     
     func changeDetailsId(id: String) {
