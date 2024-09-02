@@ -13,7 +13,6 @@ final class UsersAPIimpl : UsersAPI  {
     let API_URL = "https://api.github.com/search/users?q="
     let API_TOKEN = "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"
     let cache = UsersCache()
-    var state: GlobalState?
     var query: String
     var totalCount: Int
     var page: Int
@@ -34,7 +33,6 @@ final class UsersAPIimpl : UsersAPI  {
         
         var users: [User] = []
         
-        await state?.setIsFetchingFun(input: true)
         
         if (query != input) {
             query = input
@@ -60,11 +58,9 @@ final class UsersAPIimpl : UsersAPI  {
         
         
         if (input == "") {
-            await state?.setIsFetchingFun(input: false)
             return []
         }
         if (users.count == totalCount && totalCount>0) {
-            await state?.setIsFetchingFun(input: false)
             hasNextPage = false
             return users
         }
@@ -85,14 +81,12 @@ final class UsersAPIimpl : UsersAPI  {
             cache.setArray(users, forKey: input)
             page+=1
             cache.setLastPage(lastPage: page as NSNumber, forKey: input)
-            await state?.setIsFetchingFun(input: false)
             hasNextPage = true
             return users
         }
     
         else {
             shouldFetchAfterCaching = true
-            await state?.setIsFetchingFun(input: false)
             return users
         }
     }

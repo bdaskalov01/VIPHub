@@ -10,11 +10,11 @@ import Foundation
 final class DetailsPresenter: DetailsPresenterProtocol {
     
     var view: DetailsViewProtocol?
-    var state: GlobalState?
+    var globalState: GlobalState = GlobalState().getInstance()
     
     func updateDetails(details: UserDetails) {
         Task {
-            await state!.setDetails(input: details)
+            self.globalState.setDetails(input: details)
             let detailsWithLabel = {
                 details.modeltoArray().compactMap { item in
                         if let stringItem = item as? String {
@@ -29,7 +29,7 @@ final class DetailsPresenter: DetailsPresenterProtocol {
                     }
             }()
 
-            await state?.setDetailsWithLabel(input: detailsWithLabel)
+            self.globalState.setDetailsWithLabel(input: detailsWithLabel)
         }
     }
     

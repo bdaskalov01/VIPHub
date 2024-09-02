@@ -16,13 +16,15 @@ final class UsersInteractor: UsersInteractorProtocol {
     
     func displayData(input: String) {
         Task {
+            presenter!.changeFetching(input: true)
             let result = try await self.apiWorker?.fetchData(input: input)
-            presenter?.mapUsers(users: result!)
+            presenter!.changeFetching(input: false)
+            presenter!.mapUsers(users: result!)
         }
     }
     
-    func navigateToDetails(id: String) {
-        router?.navigateToDetails(id: id)
+    func changeDetailsId(id: String) {
+        presenter!.changeDetailsId(id: id)
     }
     
 }

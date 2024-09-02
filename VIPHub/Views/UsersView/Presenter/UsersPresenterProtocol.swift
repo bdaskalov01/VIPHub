@@ -11,5 +11,8 @@ protocol UsersPresenterProtocol {
     
     func mapUsers(users: [User])
     
+    func changeDetailsId(id: String) 
+    
+    func changeFetching(input: Bool)
     
 }
