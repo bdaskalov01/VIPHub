@@ -36,6 +36,12 @@ class GlobalState: ObservableObject {
         }
     }
     
+    public func setError(input: String) {
+        DispatchQueue.main.async {
+            GlobalState.shared.error = input
+        }
+    }
+    
     public func setDetails(input: UserDetails) {
         DispatchQueue.main.async {
             GlobalState.shared.details = input
@@ -57,6 +63,12 @@ class GlobalState: ObservableObject {
     public func setIsFetchingFun(input: Bool) {
         DispatchQueue.main.async {
             GlobalState.shared.isFetching = input
+        }
+    }
+    
+    public func setIsThereError(input: Bool) {
+        DispatchQueue.main.async {
+            GlobalState.shared.isThereError = input
         }
     }
     

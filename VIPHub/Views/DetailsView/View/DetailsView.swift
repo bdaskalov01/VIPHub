@@ -12,7 +12,7 @@ import SwiftUI
 struct DetailsView: View {
     
     var interactor: DetailsInteractorProtocol?
-    @ObservedObject var state: GlobalState
+    @ObservedObject var globalState: GlobalState = GlobalState().getInstance()
     var id: String = ""
     
     var body: some View {
@@ -21,7 +21,7 @@ struct DetailsView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        AsyncImage(url: URL(string: state.details.avatar_url)) { phase in
+                        AsyncImage(url: URL(string: globalState.details.avatar_url)) { phase in
                             switch phase {
                             case .empty:
                                 ProgressView() // Show a loading indicator
@@ -46,7 +46,7 @@ struct DetailsView: View {
                     }
                     HStack {
                         Spacer()
-                        Text(state.details.login)
+                        Text(globalState.details.login)
                             .fontWeight(.medium)
                             .padding()
                         Spacer()
@@ -54,7 +54,7 @@ struct DetailsView: View {
                 }
                 
                 
-                ForEach(state.detailsWithLabels, id: \.self) { item in
+                ForEach(globalState.detailsWithLabels, id: \.self) { item in
                     Text(item)
                 }
             }
@@ -62,7 +62,7 @@ struct DetailsView: View {
            
         }
         .onAppear {
-            interactor!.displayUserDetails(id: state.detailsId)
+            interactor!.displayUserDetails(id: globalState.detailsId)
         }
     }
 }

@@ -11,6 +11,7 @@ class UsersCache {
 
     static let cache = NSCache<NSString, UserWrapper>()
     static let lastPage = NSCache<NSString, NSNumber>()
+    static let totalCount = NSCache<NSString, NSNumber>()
 
 
     func setArray(_ user: [User], forKey key: String) {
@@ -38,5 +39,18 @@ class UsersCache {
 
     func removeLastPage(forKey key: String) {
         UsersCache.lastPage.removeObject(forKey: key as NSString)
+    }
+    
+    func setTotalCount(totalCount: NSNumber, forKey key: String) {
+        UsersCache.totalCount.setObject(totalCount as NSNumber, forKey: key as NSString)
+    }
+
+
+    func getTotalCount(forKey key: String) -> Int? {
+        return UsersCache.totalCount.object(forKey: key as NSString) as? Int
+    }
+
+    func removeTotalCount(forKey key: String) {
+        UsersCache.totalCount.removeObject(forKey: key as NSString)
     }
 }

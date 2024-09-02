@@ -9,7 +9,7 @@ import Foundation
 
 protocol UsersAPI {
     
-    func fetchUsers(input: String) async throws -> [User]
+    func fetchUsers(input: String) async throws -> ([User], String)
     
 }
 

@@ -13,8 +13,8 @@ final class UsersRouterImpl: UsersRouter {
     
     @MainActor
     func navigateToDetails(id: String) {
-        state?.setDetailsId(input: id)
-        state?.navigate(input: .details)
+        state!.setDetailsId(input: id)
+        state!.navigate(input: .details)
     }
     
 }
